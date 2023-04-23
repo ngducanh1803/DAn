@@ -11,13 +11,17 @@ import java.util.List;
 public interface IPhieuDatService {
     Page<PhieuDat> getPagePhieudat(Pageable pageable);
 
-    List<PhieuDat> getAll();
+    List<PhieuDat> getAllPhieu();
 
     PhieuDatDto Update(int id, PhieuDatDto phieuDatDto);
 
     void deletePhieuDatById(int id);
 
+    PhieuDatDto getById(int id);
+
     PhieuDatDto addKhach(PhieuDatDto phieuDatDto);
+
+    List<Object[]> getPhieuDatWithGia();
 
 
 }

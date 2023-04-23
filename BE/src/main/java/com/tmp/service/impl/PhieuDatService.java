@@ -3,8 +3,10 @@ package com.tmp.service.impl;
 import com.tmp.dto.PhieuDatDto;
 import com.tmp.entity.ChiTietTour;
 import com.tmp.entity.PhieuDat;
+import com.tmp.entity.Tour;
 import com.tmp.repository.IChiTietTourRepository;
 import com.tmp.repository.IPhieuDatRepository;
+import com.tmp.repository.ITourRepository;
 import com.tmp.service.IPhieuDatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,9 @@ public class PhieuDatService implements IPhieuDatService {
 
     @Autowired
     private IChiTietTourRepository chiTietTourRepository;
+
+    @Autowired
+    private ITourRepository tourRepository;
 
 
 
@@ -46,12 +51,26 @@ public class PhieuDatService implements IPhieuDatService {
         phieuDatRepository.deleteById(id);
     }
 
+    @Override
+    public PhieuDatDto getById(int id) {
+        PhieuDat phieuDat = phieuDatRepository.getById(id);
+        return new PhieuDatDto(phieuDat);
+    }
 
-    public ChiTietTour setSlTour(int id){
-        ChiTietTour chiTietTour = chiTietTourRepository.getById(id);
-        chiTietTour.setSoLuongCon(chiTietTour.getSoLuongCon() - 1);
-        chiTietTourRepository.save(chiTietTour);
-        return chiTietTour;
+    public Tour setSlTour(int id){
+        Tour tour = tourRepository.getById(id);
+        tour.setSltd(tour.getSltd() - 1);
+        tourRepository.save(tour);
+        return tour;
+    }
+
+    public float tinhTiem(int idTour, int idP){
+        Tour tour = tourRepository.getById(idTour);
+        PhieuDat dat = phieuDatRepository.getById(idP);
+        float thanhTien = ((tour.getGiaNguoiLon()*dat.getNguoiLon()) + (tour.getGiaTreEm()*dat.getTreEm()) + (tour.getGiaTreNho()* dat.getTreNho()));
+        dat.setThanhTien(thanhTien);
+        phieuDatRepository.save(dat);
+        return thanhTien;
     }
 
     @Override
@@ -60,7 +79,6 @@ public class PhieuDatService implements IPhieuDatService {
         ChiTietTour chiTietTour = chiTietTourRepository.getById(phieuDatDto.getIdChitiettour());
         entity.setTen(phieuDatDto.getTen());
         entity.setDiaChi(phieuDatDto.getDiaChi());
-//        entity.setCmnd(phieuDatDto.getCmnd());
         entity.setEmail(phieuDatDto.getEmail());
         entity.setSdt(phieuDatDto.getSdt());
         entity.setGhiChu(phieuDatDto.getGhiChu());
@@ -69,6 +87,8 @@ public class PhieuDatService implements IPhieuDatService {
         entity.setNguoiLon(phieuDatDto.getNguoiLon());
         entity.setSoLuongDat(phieuDatDto.getSoLuongDat());
         entity.setChiTietTour(chiTietTour);
+        entity.setThanhTien(phieuDatDto.getThanhTien());
+//        getPhieuDatWithGia();
         setSlTour(phieuDatDto.getIdChitiettour());
         phieuDatRepository.save(entity);
         return new PhieuDatDto(entity);
@@ -81,8 +101,23 @@ public class PhieuDatService implements IPhieuDatService {
     }
 
     @Override
-    public List<PhieuDat> getAll() {
-        List<PhieuDat> list = phieuDatRepository.findAll();
-        return list;
+    public List<PhieuDat> getAllPhieu() {
+        List<PhieuDat> lists = phieuDatRepository.findAll();
+        return lists;
+    }
+
+    @Override
+    public List<Object[]> getPhieuDatWithGia() {
+        List<Object[]> gia = phieuDatRepository.getPhieuDatWithGia();
+        for (Object[] row : gia) {
+            int id = (int) row[0];
+            float tien = (float) row[1];
+            PhieuDat phieuDat = phieuDatRepository.findById(id).orElse(null);
+            if (phieuDat != null) {
+                phieuDat.setThanhTien(tien);
+                phieuDatRepository.save(phieuDat);
+            }
+        }
+        return gia;
     }
 }

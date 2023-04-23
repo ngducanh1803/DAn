@@ -18,18 +18,19 @@ public class PhieuDatControllerAdmin {
     @Autowired
     private IPhieuDatService phieuDatService;
 
-// fix
-    @GetMapping("")
-    public Page<PhieuDat> getAllPhieuDat(Pageable pageable){
+// fix xong
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllPhieuDat(Pageable pageable){
         Page<PhieuDat> phieuDatPage = phieuDatService.getPagePhieudat(pageable);
-        return phieuDatPage;
+        return new ResponseEntity<>(phieuDatPage, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<?> getAll(){
-        List<PhieuDat> phieuDatPage = phieuDatService.getAll();
-        return new ResponseEntity<>(phieuDatPage,HttpStatus.OK);
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllPhieu(){
+        List<PhieuDat> phieuDats = phieuDatService.getAllPhieu();
+        return new ResponseEntity<>(phieuDats, HttpStatus.OK);
     }
+
 
     @PostMapping("/add")
     public ResponseEntity<?> addUserAdmin(@RequestBody PhieuDatDto phieuDatDto){

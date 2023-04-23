@@ -1,5 +1,6 @@
 package com.tmp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +32,7 @@ public class HoaDon implements Serializable {
     @Column(name = "tinhtrang")
     private int tinhTrang;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_pd")
     private PhieuDat phieuDat;

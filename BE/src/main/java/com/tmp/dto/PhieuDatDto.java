@@ -22,13 +22,13 @@ public class PhieuDatDto {
     private int treNho;
     private int nguoiLon;
     private int soLuongDat;
+    private double thanhTien;
     private int idChitiettour;
 
 
     public PhieuDatDto(PhieuDat user){
         if(user!= null){
             this.ten = user.getTen();
-//            this.cmnd = user.getCmnd();
             this.diaChi = user.getDiaChi();
             this.email  = user.getEmail();
             this.sdt = user.getSdt();
@@ -37,6 +37,7 @@ public class PhieuDatDto {
             this.treNho = user.getTreNho();
             this.nguoiLon = user.getNguoiLon();
             this.soLuongDat = user.getSoLuongDat();
+            this.thanhTien = user.getThanhTien();
             this.idChitiettour = user.getChiTietTour().getIdChiTiet();
         }
     }

@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/v1/toursAdmin")
 @CrossOrigin("*")
@@ -21,9 +23,15 @@ public class TourControllerAdmin {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping("")
+    @GetMapping("Getall")
     public ResponseEntity<?> getAllTours(Pageable pageable) {
         Page<Tour> entities = service.getTourPaging(pageable);
+        return new ResponseEntity<>(entities, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllTours() {
+        List<Tour> entities = service.getAllTour();
         return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 
@@ -31,8 +39,8 @@ public class TourControllerAdmin {
     public ResponseEntity<?> getTourById(@PathVariable(name = "id") int id) {
         Tour tour = service.getTourById(id);
         TourDto tourDto = modelMapper.map(tour , TourDto.class);
-        tourDto.setIdTinh(tour.getTinh().getId());
-        tourDto.setDiaDiem(tour.getDiaDiem().getDiemDen());
+//        tourDto.setIdTinh(tour.getTinh().getId());
+//        tourDto.setDiaDiem(tour.getDiaDiem().getDiemDen());
         return new ResponseEntity<>(tourDto, HttpStatus.OK);
     }
 
@@ -46,6 +54,12 @@ public class TourControllerAdmin {
     public ResponseEntity<?> updateTour(@PathVariable int id,@RequestBody TourDto tourDto){
         TourDto dto = service.updateTour(id,tourDto);
         return new ResponseEntity<>(dto,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deteleById(@PathVariable int id){
+        service.deleteById(id);
+        return ResponseEntity.ok("Detele Success");
     }
 
 

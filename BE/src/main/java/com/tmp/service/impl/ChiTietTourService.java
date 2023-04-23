@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChiTietTourService implements IChiTietTourService {
 
@@ -24,6 +26,12 @@ public class ChiTietTourService implements IChiTietTourService {
         Page<ChiTietTour> chiTietTours = repository.findAll(pageable);
 
         return chiTietTours;
+    }
+
+    @Override
+    public List<ChiTietTour> getAll(){
+        List<ChiTietTour> lists = repository.findAll();
+        return lists;
     }
 
     @Override

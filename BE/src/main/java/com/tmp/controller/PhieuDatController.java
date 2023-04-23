@@ -22,6 +22,12 @@ public class PhieuDatController {
         return ResponseEntity.ok("Success");
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable int id){
+        PhieuDatDto dto = service.getById(id);
+        return new ResponseEntity<>(dto,HttpStatus.OK);
+    }
+
 
 
 }

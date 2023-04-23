@@ -23,6 +23,8 @@ public class TinhService implements ITinhService {
         return tinh;
     }
 
+
+
     @Override
     public void deleteTinhById(int id) {
         tinhRepository.deleteById(id);

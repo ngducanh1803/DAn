@@ -16,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TourService implements ITourService {
     @Autowired
@@ -30,6 +32,12 @@ public class TourService implements ITourService {
     }
 
     @Override
+    public List<Tour> getAllTour() {
+        List<Tour> lists = tourRepository.findAll();
+        return lists;
+    }
+
+    @Override
     public Tour getTourById(int id) {
         return tourRepository.findById(id).get();
     }
@@ -37,10 +45,11 @@ public class TourService implements ITourService {
     @Override
     public TourDto addTour(TourDto dto) {
         Tour tour = new Tour();
-        Tinh tinh = tinhRepository.getById(dto.getIdTinh());
+//        Tinh tinh = tinhRepository.getById(dto.getIdTinh());
         tour.setPhuongTien(dto.getPhuongTien());
         tour.setSltd(dto.getSltd());
         tour.setTenTour(dto.getTenTour());
+        tour.setXuatPhat(dto.getXuatPhat());
         tour.setSoNgay(dto.getSoNgay());
         tour.setSoDem(dto.getSoDem());
         tour.setGiaNguoiLon(dto.getGiaNguoiLon());
@@ -49,7 +58,7 @@ public class TourService implements ITourService {
         tour.setMoTaTour(dto.getMoTaTour());
         tour.setLichTrinh(dto.getLichTrinh());
         tour.setLoaiTour(dto.getLoaiTour());
-        tour.setTinh(tinh);
+//        tour.setTinh(tinh);
         tourRepository.save(tour);
         return new TourDto(tour);
     }
@@ -60,6 +69,7 @@ public class TourService implements ITourService {
         tour.setPhuongTien(dto.getPhuongTien());
         tour.setSltd(dto.getSltd());
         tour.setTenTour(dto.getTenTour());
+        tour.setXuatPhat(dto.getXuatPhat());
         tour.setSoNgay(dto.getSoNgay());
         tour.setSoDem(dto.getSoDem());
         tour.setGiaNguoiLon(dto.getGiaNguoiLon());
@@ -70,6 +80,11 @@ public class TourService implements ITourService {
         tour.setLoaiTour(dto.getLoaiTour());
         tourRepository.save(tour);
         return new TourDto(tour);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        tourRepository.deleteById(id);
     }
 
 

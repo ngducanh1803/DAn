@@ -25,6 +25,9 @@ public class Tour implements Serializable {
     @Column(name = "tentour")
     private String tenTour;
 
+    @Column(name = "noixuatphat")
+    private String xuatPhat;
+
     @Column(name = "songay")
     private int soNgay;
 
@@ -53,13 +56,13 @@ public class Tour implements Serializable {
     @JoinColumn(name = "id_lt")
     private LoaiTour loaiTour;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tinh")
-    private Tinh tinh;
-
-    @ManyToOne
-    @JoinColumn(name = "id_dd")
-    private DiaDiem diaDiem;
+//    @ManyToOne
+//    @JoinColumn(name = "id_tinh")
+//    private Tinh tinh;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "id_dd")
+//    private DiaDiem diaDiem;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "tour")

@@ -1,8 +1,6 @@
 package com.tmp.dto;
 
-import com.tmp.entity.DiaDiem;
 import com.tmp.entity.LoaiTour;
-import com.tmp.entity.Tinh;
 import com.tmp.entity.Tour;
 import lombok.*;
 
@@ -15,6 +13,7 @@ public class TourDto {
     private String phuongTien;
     private int sltd;
     private String tenTour;
+    private String xuatPhat;
     private int soNgay;
     private int soDem;
     private float giaNguoiLon;
@@ -24,14 +23,15 @@ public class TourDto {
     private String lichTrinh;
     private String banDo;
     private LoaiTour loaiTour;
-    private Integer idTinh;
-    private String diaDiem;
+//    private Integer idTinh;
+//    private String diaDiem;
 
     public TourDto(Tour entity){
         if (entity!= null){
             this.phuongTien = entity.getPhuongTien();
             this.sltd = entity.getSltd();
             this.tenTour = entity.getTenTour();
+            this.xuatPhat = entity.getXuatPhat();
             this.soNgay = entity.getSoNgay();
             this.soDem = entity.getSoDem();
             this.giaNguoiLon = entity.getGiaNguoiLon();
@@ -40,7 +40,7 @@ public class TourDto {
             this.moTaTour = entity.getMoTaTour();
             this.lichTrinh = entity.getLichTrinh();
             this.loaiTour = entity.getLoaiTour();
-            this.idTinh = entity.getTinh().getId();
+//            this.idTinh = entity.getTinh().getId();
         }
     }
 

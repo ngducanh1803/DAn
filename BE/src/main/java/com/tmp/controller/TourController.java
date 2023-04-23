@@ -31,8 +31,8 @@ public class TourController {
     public ResponseEntity<?> getTourById(@PathVariable(name = "id") int id) {
         Tour tour = service.getTourById(id);
         TourDto tourDto = modelMapper.map(tour , TourDto.class);
-        tourDto.setIdTinh(tour.getTinh().getId());
-        tourDto.setDiaDiem(tour.getDiaDiem().getDiemDen());
+//        tourDto.setIdTinh(tour.getTinh().getId());
+//        tourDto.setDiaDiem(tour.getDiaDiem().getDiemDen());
         return new ResponseEntity<>(tourDto, HttpStatus.OK);
     }
 

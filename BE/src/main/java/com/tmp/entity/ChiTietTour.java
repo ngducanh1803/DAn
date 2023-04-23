@@ -35,7 +35,7 @@ public class ChiTietTour implements Serializable {
     @CreationTimestamp
     private Date ngayVe;
 
-    @Column(name = "soluongcon")
+    @Column(name = "soluong")
     private int soLuongCon;
 
     @Column(name = "ghichu")
@@ -48,10 +48,11 @@ public class ChiTietTour implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_tour")
     private Tour tour_chitiet;
-//
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "chiTietTour")
-//    private List<PhieuDat> phieuDats;
+
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "chiTietTour", cascade = CascadeType.ALL)
+    private List<PhieuDat> phieuDats;
 
 //    @ManyToOne
 //    @JoinColumn(name = "id")
