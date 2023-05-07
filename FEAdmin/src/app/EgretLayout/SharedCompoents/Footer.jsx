@@ -26,7 +26,7 @@ const Footer = ({ theme, settings }) => {
         <div className="flex flex-middle container px-sm-30 w-100">
           <a href="#">
             <Button variant="contained" color="secondary">
-              Hotline: 0349655473
+              Hotline: 0971533818
             </Button>
           </a>
           <span className="m-auto"></span>

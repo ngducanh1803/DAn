@@ -1,7 +1,9 @@
 package com.tmp.repository;
 
-import com.tmp.entity.TinTuc;
+import com.tmp.entity.Tintuc;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ITinTucRepository extends JpaRepository<TinTuc,Integer> {
+@Repository
+public interface ITinTucRepository extends JpaRepository<Tintuc,Integer> {
 }

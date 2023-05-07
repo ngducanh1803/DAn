@@ -22,33 +22,19 @@ export const getPhieuDat = () => {
     return axios.get(url)
 }
 
-export const getByStatus = (arr) => {
-    const url = API_ROOT + `/employees?statuses=${arr.join(",")}&page=1&size=50`
+
+export const getTourId = (id) => {
+    const url = `http://localhost:8080/api/v1/tours/${id}`
     return axios.get(url)
 }
 
-export const getById = (id) => {
-    const url = API_ROOT + `/employees/${id}`
+export const getChiTourById = (id) => {
+    const url = `http://localhost:8080/api/v1/chitiet/${id}`
     return axios.get(url)
 }
 
-export const rejectEmployee = (obj) => {
-    const url = API_ROOT + `/employees/${obj.employeeId}/status`
-    return axios.put(url, obj)
-}
-
-export const approveEmployee = (obj) => {
-    const url = API_ROOT + `/employees/${obj.employeeId}/status`
-    return axios.put(url, obj)
-}
-
-export const requiredSupplementEmployee = (obj) => {
-    const url = API_ROOT + `/employees/${obj.employeeId}/status`
-    return axios.put(url, obj)
-}
-
-export const getForm = (id) => {
-    const url = API_ROOT + `/employees/${id}/form`
-    return axios.get(url)
+export const updateTrangThaiPhieuDat = (id) => {
+    const url = `http://localhost:8080/api/v1/phieuAdmins/updateTrang/${id}`
+    return axios.put(url, { trangThai: 1 })
 }
 

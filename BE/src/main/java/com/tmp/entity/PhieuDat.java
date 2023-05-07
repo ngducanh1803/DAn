@@ -66,12 +66,12 @@ public class PhieuDat implements Serializable {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "id_chitiet")
+    @JoinColumn(name = "id_chitiet",referencedColumnName = "id_chitiet")
     private ChiTietTour chiTietTour;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "phieuDat", cascade = CascadeType.ALL)
-    private List<HoaDon> hoaDons;
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "phieuDat", cascade = CascadeType.ALL)
+//    private List<HoaDon> hoaDons;
 
 
 

@@ -21,7 +21,7 @@ public class ChiTietTourDto {
 
     public ChiTietTourDto(ChiTietTour entity){
         if (entity != null){
-//            this.id = entity.getId();
+            this.id = entity.getIdChiTiet();
             this.ngayDi = entity.getNgayDi();
             this.ngayVe = entity.getNgayVe();
             this.soLuongCon = entity.getSoLuongCon();

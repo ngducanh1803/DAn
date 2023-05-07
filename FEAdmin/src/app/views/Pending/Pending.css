@@ -1,0 +1,24 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .ant-modal-content {
+    margin-top: -100 !important;
+  }
+
+  .btn {
+    border-radius: 10;
+    background-color: none;
+    display: inline-block;
+  }
+
+  .blue {
+    background-color: aqua;
+  }
+
+  .red {
+    background-color: red;
+  }

@@ -70,11 +70,15 @@ function StaffAccepted() {
 
     const onSearch = () => {
         const result = dataTourChiTiet.filter(
-            (item) =>
-                item.idChiTiet.toString().includes(searchInfo) ||
-                item.ngayDi.toString().includes(searchInfo) ||
-                item.ngayDi.toString().includes(searchInfo) ||
-                item.ghiChu.toString().includes(searchInfo)
+            (item) => {
+                let ngayDi = moment(item.ngayDi, "YYYY-MM_DD").format("DD-MM-YYYY")
+                let ngayVe = moment(item.ngayVe, "YYYY-MM-DD").format("DD-MM-YYYY")
+                if (ngayDi.includes(searchInfo) || ngayVe.includes(searchInfo)) {
+                    return true
+                } else {
+                    return false
+                }
+            }
         );
         setDataTourSearch(result)
         setDem(1)
@@ -156,9 +160,9 @@ function StaffAccepted() {
                         <HomeFilled />
                     </Breadcrumb.Item>
                     <Breadcrumb.Item href="/conclude/manage">
-                        <span>Quản lý nhân viên</span>
+                        <span>Quản lý tour</span>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Tạo mới</Breadcrumb.Item>
+                    <Breadcrumb.Item>Chi tiết tour</Breadcrumb.Item>
                 </Breadcrumb>
 
                 <div className='set-space-between'>
@@ -224,39 +228,39 @@ function StaffAccepted() {
                                 );
                             },
                         },
-                        { title: 'Id', dataIndex: 'idChiTiet', width: 50 },
+                        { title: 'idTour', dataIndex: 'idTour', width: 100 },
                         {
-                            title: 'Ngay di',
-                            width: 100,
+                            title: 'Ngày Đi',
+                            width: 120,
                             render: rowData => moment(rowData.ngayDi, "YYYY-MM-DD").format("DD-MM-YYYY")
                         },
                         {
-                            title: 'Ngay ve',
-                            width: 100,
+                            title: 'Ngày Về',
+                            width: 120,
                             render: rowData => moment(rowData.ngayVe, "YYYY-MM-DD").format("DD-MM-YYYY")
 
                         },
+                        // {
+                        //     title: 'So luong con',
+                        //     width: 120,
+                        //     dataIndex: 'soLuongCon'
+                        // },
                         {
-                            title: 'So luong con',
-                            width: 120,
-                            dataIndex: 'soLuongCon'
-                        },
-                        {
-                            title: 'Ghi chu',
+                            title: 'Ghi chú',
                             dataIndex: "ghiChu",
                             // render: record => record.ghiChu.substring(0, 30) + "..."
                             render: (text, record) => {
                                 return (
                                     <div onClick={() => handleCellClick(record.key)}>
-                                        {cellVisible[record.key] ? text : record.ghiChu.substring(0, 30) + "..."}
+                                        {cellVisible[record.key] ? text : record.ghiChu.substring(0, 50) + "..."}
                                     </div>
                                 );
                             }
                         },
                         {
-                            title: 'HInh anh',
+                            title: 'Hình ảnh',
                             // dataIndex: "hinhAnh"
-                            render: rowData => rowData.hinhAnh.substring(0, 30) + "..."
+                            render: rowData => <img style={{ width: 100 }} src={rowData?.hinhAnh && `http://127.0.0.1:8887/${rowData.hinhAnh}`} alt="ing" />
                         }
                     ]}
                     pagination={{

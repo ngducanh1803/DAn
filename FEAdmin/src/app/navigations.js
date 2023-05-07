@@ -1,11 +1,5 @@
 import ConstantList from './appConfig';
 export const navigations = [
-    // {
-    //     name: 'Dashboard.dashboard',
-    //     icon: 'dashboard',
-    //     path: ConstantList.ROOT_PATH + 'dashboard/analytics',
-    //     isVisible: true,
-    // },
     {
         name: 'Quan ly du lich',
         icon: 'engineering',
@@ -27,6 +21,24 @@ export const navigations = [
             {
                 name: 'Chi tiet tour',
                 path: ConstantList.ROOT_PATH + 'staffAccepted_manager/staffAccepted',
+                icon: 'taskAlt',
+                isVisible: true,
+            },
+            {
+                name: 'Tin Tuc',
+                path: ConstantList.ROOT_PATH + 'tintuc_manager/tintuc',
+                icon: 'taskAlt',
+                isVisible: true,
+            },
+            {
+                name: 'Khach San',
+                path: ConstantList.ROOT_PATH + 'khachsan_manager/khachsan',
+                icon: 'taskAlt',
+                isVisible: true,
+            },
+            {
+                name: 'Khach Dat',
+                path: ConstantList.ROOT_PATH + 'khachdat_manager/khachdat',
                 icon: 'taskAlt',
                 isVisible: true,
             },

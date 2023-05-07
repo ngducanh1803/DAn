@@ -144,9 +144,9 @@ const CreateStaff = () => {
                         <HomeFilled />
                     </Breadcrumb.Item>
                     <Breadcrumb.Item href="/conclude/manage">
-                        <span>Quản lý nhân viên</span>
+                        <span>Quản lý tour</span>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Tạo mới</Breadcrumb.Item>
+                    <Breadcrumb.Item>Danh sách tour</Breadcrumb.Item>
                 </Breadcrumb>
 
                 <div className='set-space-between'>
@@ -210,31 +210,37 @@ const CreateStaff = () => {
                                 );
                             },
                         },
-                        { title: 'Ten tour', dataIndex: 'tenTour' },
-                        { title: 'Phuong tien', dataIndex: 'phuongTien' },
-                        { title: 'Xuat phat', dataIndex: 'xuatPhat' },
-                        { title: 'So ngay', dataIndex: 'soNgay', width: 75, align: 'center' },
-                        { title: 'So dem', dataIndex: 'soDem', width: 75, align: 'center' },
+                        { title: 'Tên tour', dataIndex: 'tenTour' },
+                        { title: 'Phương tiện', dataIndex: 'phuongTien' },
+                        { title: 'Xuất phát', dataIndex: 'xuatPhat' },
+                        { title: 'Số lượng', dataIndex: 'sltd' },
+                        { title: 'Số ngày', dataIndex: 'soNgay', width: 75, align: 'center' },
+                        { title: 'Số đêm', dataIndex: 'soDem', width: 75, align: 'center' },
                         {
-                            title: 'Gia nguoi lon',
+                            title: 'Giá người lớn',
                             width: 110,
                             align: 'center',
                             render: (rowData) => rowData.giaNguoiLon.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
                         },
                         {
-                            title: 'Gia tre em',
+                            title: 'Giá trẻ em',
                             width: 100,
                             align: 'center',
                             render: (rowData) => rowData.giaTreEm.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
 
                         },
                         {
-                            title: 'Gia tre nho',
+                            title: 'Giá trẻ nhỏ',
                             width: 100,
                             align: 'center',
                             render: (rowData) => rowData.giaTreNho.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
                         },
                         { title: 'Lich trinh', dataIndex: 'lichTrinh' },
+                        {
+                            title: 'Hình ảnh',
+                            // dataIndex: "moTaTour",
+                            render: rowData => <img style={{ width: 100 }} src={rowData?.moTaTour && `http://127.0.0.1:8887/${rowData.moTaTour}`} alt="img" />
+                        },
 
                     ]}
                     pagination={{

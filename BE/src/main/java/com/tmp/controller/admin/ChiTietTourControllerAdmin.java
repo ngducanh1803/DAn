@@ -27,7 +27,7 @@ public class ChiTietTourControllerAdmin {
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getAll(){
-        List<ChiTietTour> lists = service.getAll();
+        List<ChiTietTourDto> lists = service.getAll();
         return new ResponseEntity<>(lists,HttpStatus.OK);
     }
 

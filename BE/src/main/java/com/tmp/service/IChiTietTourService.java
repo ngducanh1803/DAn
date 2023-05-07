@@ -11,7 +11,7 @@ public interface IChiTietTourService {
 
     Page<ChiTietTour> getAllChiTiet(Pageable pageable);
 
-    List<ChiTietTour> getAll();
+    List<ChiTietTourDto> getAll();
 
     ChiTietTourDto addChiTietTour(ChiTietTourDto dto);
 

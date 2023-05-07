@@ -27,7 +27,7 @@ public class PhieuDatControllerAdmin {
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getAllPhieu(){
-        List<PhieuDat> phieuDats = phieuDatService.getAllPhieu();
+        List<PhieuDatDto> phieuDats = phieuDatService.getAllPhieu();
         return new ResponseEntity<>(phieuDats, HttpStatus.OK);
     }
 
@@ -41,6 +41,12 @@ public class PhieuDatControllerAdmin {
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePdat(@PathVariable int id,@RequestBody PhieuDatDto phieuDatDto){
         PhieuDatDto update = phieuDatService.Update(id,phieuDatDto);
+        return new ResponseEntity<>(update, HttpStatus.OK);
+    }
+
+    @PutMapping("/updateTrang/{idTrang}")
+    public ResponseEntity<?> updateTrangThai(@PathVariable int idTrang,@RequestBody PhieuDatDto dto){
+        PhieuDatDto update = phieuDatService.UpdateTrangThai(idTrang,dto);
         return new ResponseEntity<>(update, HttpStatus.OK);
     }
 

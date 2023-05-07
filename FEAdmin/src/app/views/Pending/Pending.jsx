@@ -1,17 +1,19 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     DeleteFilled,
     EditFilled,
-    EyeFilled,
     HomeFilled,
 } from '@ant-design/icons';
-import { Breadcrumb, Button, Form, Modal, Table, Tooltip } from 'antd';
+import { Breadcrumb, Button, Modal, Table, Tooltip } from 'antd';
 import Styled from '../create-staff/CreateStaffStyled';
-import { getPhieuDat, deletePhieu } from "./PendingService";
+import { getPhieuDat, deletePhieu, updateTrangThaiPhieuDat } from "./PendingService";
 import SearchStaff from '../create-staff/Search';
 import { toast } from 'react-toastify';
 import moment from "moment";
 import PendingDialog from "./PendingDialog";
+import ChiTietDialog from "./ChiTietDialog";
+import DuyetDialog from "./DuyetDialog";
+import { update } from "lodash";
 
 toast.configure({
     autoClose: 1000,
@@ -45,21 +47,29 @@ function Pending() {
     const [phieuDelete, setPhieuDelete] = useState()
     const [phieuEdit, setPhieuEdit] = useState()
 
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [idChitiettour, setIdChiTietTour] = useState()
+
+    const [isOpenDuyet, setIsOpenDuyet] = useState(false)
+    const [idDuyet, setIdDuyet] = useState()
+
     const [dem, setDem] = useState(0)
 
     const getPhieuDatFromBackEnd = async () => {
         const res = await getPhieuDat()
-        // console.log("====>", res)
         setDataPhieu(res.data)
     }
 
     const onSearch = () => {
         const result = dataPhieu.filter(
-            (item) =>
-                item.ten.includes(searchInfo) ||
-                item.diaChi.includes(searchInfo) ||
-                item.sdt.toString() === searchInfo ||
-                item.createDate.toString().includes(searchInfo)
+            (item) => {
+                if (item?.ten.includes(searchInfo) || item?.diaChi.includes(searchInfo)) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+
         );
         setDataPhieuSearch(result)
         setDem(1)
@@ -79,7 +89,6 @@ function Pending() {
     // =========== Xoa =============
 
     const onClickIconDelete = (rowData) => {
-        // console.log("==>", rowData)
         setOpenDialogDelete(true)
         setPhieuDelete(rowData)
     }
@@ -120,6 +129,41 @@ function Pending() {
         setOpenDialogAdd(true)
     }
 
+    // ========= dialog cho tiet =======
+
+    const handleClickId = (id) => {
+        setIdChiTietTour(id)
+        setIsModalOpen(true)
+    }
+
+    const cancelChiTietDialog = () => {
+        setIsModalOpen(false)
+        setIdChiTietTour()
+    }
+
+    // ========= duyet phieu ===========
+    const handleClickDuyet = async (id) => {
+        setIdDuyet(id)
+        setIsOpenDuyet(true)
+    }
+
+    const cancelDialogDuyet = () => {
+        setIsOpenDuyet(false)
+        setIdDuyet()
+    }
+
+    const okDialogDuyet = async () => {
+        const res = await updateTrangThaiPhieuDat(idDuyet)
+        if (res.status === 200) {
+            toast.success("duyet thanh cong")
+        } else {
+            toast.success("Loi !!!!")
+        }
+        cancelDialogDuyet()
+        await getPhieuDatFromBackEnd()
+    }
+
+
     useEffect(() => {
         getPhieuDatFromBackEnd()
     }, [])
@@ -132,9 +176,9 @@ function Pending() {
                         <HomeFilled />
                     </Breadcrumb.Item>
                     <Breadcrumb.Item href="/conclude/manage">
-                        <span>Quản lý nhân viên</span>
+                        <span>Quản lý tour</span>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Tạo mới</Breadcrumb.Item>
+                    <Breadcrumb.Item>Phiếu đặt</Breadcrumb.Item>
                 </Breadcrumb>
 
                 <div className='set-space-between'>
@@ -164,6 +208,24 @@ function Pending() {
                         open={openDialogDelete}
                         onOk={onOkDelete}
                         onCancel={onCancelDelete}
+                    />
+                }
+
+                {
+                    isModalOpen &&
+                    <ChiTietDialog
+                        isModalOpen={isModalOpen}
+                        handleCancel={cancelChiTietDialog}
+                        id={idChitiettour}
+                    />
+                }
+
+                {
+                    isOpenDuyet && <DuyetDialog
+                        open={isOpenDuyet}
+                        onCancel={cancelDialogDuyet}
+                        idDuyet={idDuyet}
+                        handleOk={okDialogDuyet}
                     />
                 }
 
@@ -200,31 +262,53 @@ function Pending() {
                                 );
                             },
                         },
-                        { title: 'Ten', dataIndex: 'ten' },
-                        { title: 'Dia chi', dataIndex: 'diaChi' },
-                        { title: 'SDT', dataIndex: 'sdt' },
+                        { title: 'Tên', dataIndex: 'ten' },
+                        { title: 'Địa chỉ', dataIndex: 'diaChi' },
+                        { title: 'SĐT', dataIndex: 'sdt' },
                         { title: 'Email', dataIndex: 'email' },
                         {
-                            title: 'Ngay tao',
-                            render: (rowData) => moment(rowData.createDate, 'YYYY-MM-DD').format('DD-MM-YYYY')
+                            title: 'Ngày tạo',
+                            render: (rowData) => moment(rowData.ngayDat, 'YYYY-MM-DD').format('DD-MM-YYYY')
                         },
                         {
-                            title: 'Tre em',
-                            dataIndex: "treEm"
+                            title: 'Trẻ em',
+                            dataIndex: "treEm",
+                            width: 80
                         },
                         {
-                            title: 'Tre nho',
+                            title: 'Trẻ nhỏ',
                             dataIndex: "treNho"
                         },
                         {
-                            title: 'Nguoi lon',
+                            title: 'Người lớn',
                             dataIndex: "nguoiLon"
                         },
                         {
-                            title: 'Ghi chu',
+                            title: 'Ghi chú',
                             dataIndex: "ghiChu"
                         },
-                        { title: 'id tour', dataIndex: ["chiTietTour", "idChiTiet"] },
+                        {
+                            title: 'Tour đã đặt',
+                            dataIndex: 'idChitiettour',
+                            render: (text, record) => {
+                                return (
+                                    <div onClick={() => handleClickId(record.idChitiettour)}>
+                                        <button className="btn blue">
+                                            {record?.idChitiettour ? "Xem tour " + record.idChitiettour : " "}
+                                        </button>
+                                    </div>
+                                );
+                            }
+                        },
+                        {
+                            title: "Trang thai",
+                            dataIndex: "trangThai",
+                            render: (text, record) => {
+                                return (
+                                    <div>{record.trangThai === 0 ? <button className="btn red" onClick={() => handleClickDuyet(record.id)}>Chua duyet</button> : "Da duyet"}</div>
+                                )
+                            }
+                        }
 
                     ]}
                     pagination={{

@@ -50,6 +50,7 @@ public class ChiTietTour implements Serializable {
     private Tour tour_chitiet;
 
 
+
     @JsonManagedReference
     @OneToMany(mappedBy = "chiTietTour", cascade = CascadeType.ALL)
     private List<PhieuDat> phieuDats;

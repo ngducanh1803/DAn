@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/v1/tours")
 @CrossOrigin("*")
@@ -24,6 +26,11 @@ public class TourController {
     @GetMapping()
     public ResponseEntity<?> getAllTours(Pageable pageable) {
         Page<Tour> entities = service.getTourPaging(pageable);
+        return new ResponseEntity<>(entities, HttpStatus.OK);
+    }
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllTours() {
+        List<Tour> entities = service.getAllTour();
         return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 

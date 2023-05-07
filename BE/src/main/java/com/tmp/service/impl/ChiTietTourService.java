@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,8 +30,11 @@ public class ChiTietTourService implements IChiTietTourService {
     }
 
     @Override
-    public List<ChiTietTour> getAll(){
-        List<ChiTietTour> lists = repository.findAll();
+    public List<ChiTietTourDto> getAll(){
+        List<ChiTietTourDto> lists = new ArrayList<>();
+        for (ChiTietTour dto: repository.findAll()){
+            lists.add(new ChiTietTourDto(dto));
+        }
         return lists;
     }
 

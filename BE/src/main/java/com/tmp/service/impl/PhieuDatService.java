@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,11 +38,18 @@ public class PhieuDatService implements IPhieuDatService {
         entity.setEmail(phieuDatDto.getEmail());
         entity.setSdt(phieuDatDto.getSdt());
         entity.setGhiChu(phieuDatDto.getGhiChu());
-
         entity.setTreEm(phieuDatDto.getTreEm());
         entity.setTreNho(phieuDatDto.getTreNho());
         entity.setNguoiLon(phieuDatDto.getNguoiLon());
         entity.setSoLuongDat(phieuDatDto.getSoLuongDat());
+        phieuDatRepository.save(entity);
+        return new PhieuDatDto(entity);
+    }
+
+    @Override
+    public PhieuDatDto UpdateTrangThai(int id, PhieuDatDto phieuDatDto) {
+        PhieuDat entity = phieuDatRepository.getById(id);
+        entity.setTrangThai(phieuDatDto.getTrangThai());
         phieuDatRepository.save(entity);
         return new PhieuDatDto(entity);
     }
@@ -101,23 +109,12 @@ public class PhieuDatService implements IPhieuDatService {
     }
 
     @Override
-    public List<PhieuDat> getAllPhieu() {
-        List<PhieuDat> lists = phieuDatRepository.findAll();
-        return lists;
+    public List<PhieuDatDto> getAllPhieu() {
+        List<PhieuDatDto> list = new ArrayList<>();
+        for(PhieuDat pd : phieuDatRepository.findAll()){
+            list.add(new PhieuDatDto(pd));
+        }
+        return list ;
     }
 
-    @Override
-    public List<Object[]> getPhieuDatWithGia() {
-        List<Object[]> gia = phieuDatRepository.getPhieuDatWithGia();
-        for (Object[] row : gia) {
-            int id = (int) row[0];
-            float tien = (float) row[1];
-            PhieuDat phieuDat = phieuDatRepository.findById(id).orElse(null);
-            if (phieuDat != null) {
-                phieuDat.setThanhTien(tien);
-                phieuDatRepository.save(phieuDat);
-            }
-        }
-        return gia;
-    }
 }

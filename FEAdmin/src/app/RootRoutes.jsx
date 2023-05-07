@@ -9,6 +9,9 @@ import MenuRoutes from './views/Menus/MenuRoutes';
 import PendingRoutes from './views/Pending/PendingRoutes';
 import StaffAcceptedRoutes from './views/StaffAccepted/StaffAcceptedRoutes';
 import CreateStaffRoutes from './views/create-staff/CreateStaffRoutes';
+import TinTucRoutes from './views/TinTuc/TinTucRoutes';
+import KhachSanRoutes from './views/KhachSan/KhachSanRoutes';
+import KhachDatRoutes from './views/KhachDat/KhachDatRoutes';
 
 const errorRoute = [
     {
@@ -25,6 +28,9 @@ const routes = [
     ...CreateStaffRoutes,
     ...PendingRoutes,
     ...StaffAcceptedRoutes,
+    ...TinTucRoutes,
+    ...KhachSanRoutes,
+    ...KhachDatRoutes,
     ...errorRoute,
 ];
 

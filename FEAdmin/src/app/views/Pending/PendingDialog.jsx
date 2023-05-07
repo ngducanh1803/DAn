@@ -70,7 +70,7 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 // {
                                 //     min: 10,
@@ -86,14 +86,14 @@ function PendingDialog(props) {
                         </Form.Item>
                     </Col>
 
-                    <Col span={6}>
+                    {/* <Col span={6}>
                         <Form.Item
                             name="cmnd"
                             label="CMND"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 // {
                                 //     min: 2,
@@ -101,13 +101,13 @@ function PendingDialog(props) {
                                 // },
                                 {
                                     pattern: /^\d{12}$/,
-                                    message: "Không được có ký tự đặc biệt va chu"
+                                    message: "Không được có ký tự đặc biệt va chữ"
                                 }
                             ]}
                         >
                             <Input />
                         </Form.Item>
-                    </Col>
+                    </Col> */}
 
                     <Col span={12}>
                         <Form.Item
@@ -116,11 +116,11 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 {
                                     min: 5,
-                                    message: "Ten tour phai it nhat 5 ky tu"
+                                    message: "Tên tour phải ít nhất 5 ky tu"
                                 },
                                 {
                                     pattern: /^[a-zA-Z0-9\s-]+$/,
@@ -141,7 +141,7 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 {
                                     pattern: /^(\+84|0)\d{9,10}$/,
@@ -160,7 +160,7 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 // {
                                 //     min: 3,
@@ -183,7 +183,7 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 // {
                                 //     pattern: /^[1-9]\d*$/,
@@ -206,7 +206,7 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 {
                                     pattern: /^[0-9]\d*$/,
@@ -225,7 +225,7 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 {
                                     pattern: /^[0-9]\d*$/,
@@ -244,7 +244,7 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                                 {
                                     pattern: /^[1-9]\d*$/,
@@ -263,7 +263,7 @@ function PendingDialog(props) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "không được bỏ trống"
                                 },
                             ]}
                         >

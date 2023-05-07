@@ -8,10 +8,6 @@ const SearchStaff = (props) => {
 
     const { searchInfo, setSearchInfo, onSearch } = props
 
-    // const handleChange = (e) => {
-    //     console.log("===>", e.target.value)
-    // };
-
     return (
         <>
             <Col span={5}>
