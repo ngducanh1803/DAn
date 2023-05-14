@@ -130,6 +130,7 @@ const KhachDat = () => {
 
     const onOkDelete = async () => {
         const res = await deleteKhachDat(khachDatDelete.id_khach)
+
         if (res.status === 200) {
             toast.success("Xoa Tin Tuc thanh cong")
         } else {
@@ -250,7 +251,7 @@ const KhachDat = () => {
                         },
                         {
                             title: "idKS",
-                            dataIndex: "idKS"
+                            dataIndex: "ksName"
                         },
                     ]}
                     pagination={{

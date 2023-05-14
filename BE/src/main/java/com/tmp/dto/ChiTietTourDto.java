@@ -19,6 +19,7 @@ public class ChiTietTourDto {
     private String hinhAnh;
     private Integer idTour;
 
+
     public ChiTietTourDto(ChiTietTour entity){
         if (entity != null){
             this.id = entity.getIdChiTiet();

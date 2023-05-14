@@ -35,16 +35,16 @@ const CreateStaffDialogAdd = (props) => {
         if (item) {
             const res = await updateTour(item.id, newValue)
             if (res.status === 200) {
-                toast.success("Sua thanh cong")
+                toast.success("Sửa thành công")
             } else {
-                toast.error("Loi roi !!!!!!!!!!!!!!")
+                toast.error("Lỗi rồi !!!!!!!!!!!!!!")
             }
         } else {
             const res = await addTour(newValue)
             if (res.status === 200) {
-                toast.success("Them hanh cong")
+                toast.success("Thêm thành công")
             } else {
-                toast.error("Loi roi !!!!!!!!!!!!!!")
+                toast.error("Lỗi rồi !!!!!!!!!!!!!!")
             }
         }
         form.resetFields()
@@ -64,7 +64,7 @@ const CreateStaffDialogAdd = (props) => {
 
     return (
         <Modal
-            title="Them Tour"
+            title="Thêm tour"
             open={open}
             width={1000}
             style={{ height: 700 }}
@@ -81,15 +81,15 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={18}>
                         <Form.Item
                             name="tenTour"
-                            label="Ten tour"
+                            label="Tên tour"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "Bắt buộc phải nhập"
                                 },
                                 {
                                     min: 10,
-                                    message: "Ten tour phai it nhat 10 ky tu"
+                                    message: "Tên tour phải có ít nhất có 10 kí tự"
                                 },
                                 {
                                     pattern: /^[\p{L}\s]+$/u,
@@ -104,15 +104,15 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={6}>
                         <Form.Item
                             name="phuongTien"
-                            label="Phuong tien"
+                            label="Phương tiện"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "Bắt buộc phải nhập"
                                 },
                                 {
-                                    min: 2,
-                                    message: "Ten tour phai it nhat 2 ky tu"
+                                    min: 10,
+                                    message: "phương tiện phải có ít nhất 2 ký tự"
                                 },
                                 {
                                     pattern: /^[\p{L}\s]+$/u,
@@ -129,15 +129,15 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={6}>
                         <Form.Item
                             name="sltd"
-                            label="So luong tour"
+                            label="Số lượng tour"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "Bắt buộc phải nhập"
                                 },
                                 {
                                     pattern: /^[1-9]\d*$/,
-                                    message: "So luong > 0"
+                                    message: "Số lượng > 0"
                                 }
                             ]}
                         >
@@ -148,15 +148,15 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={6}>
                         <Form.Item
                             name="xuatPhat"
-                            label="Xuat phat"
+                            label="Xuất phát"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "Bắt buộc phải nhập"
                                 },
                                 {
-                                    min: 3,
-                                    message: "Ten tour phai it nhat 5 ky tu"
+                                    min: 5,
+                                    message: "chuỗi phải có ít nhất 5 kí tự"
                                 },
                                 {
                                     pattern: /^[\p{L}\s]+$/u,
@@ -171,15 +171,15 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={6}>
                         <Form.Item
                             name="soNgay"
-                            label="So ngay"
+                            label="Số ngày"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "bắt buộc phải nhập"
                                 },
                                 {
                                     pattern: /^[1-9]\d*$/,
-                                    message: "So ngay > 0"
+                                    message: "Số ngày > 0"
                                 }
                             ]}
                         >
@@ -190,15 +190,15 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={6}>
                         <Form.Item
                             name="soDem"
-                            label="So dem"
+                            label="Số đêm"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "Bắt buộc phải nhập"
                                 },
                                 {
                                     pattern: /^[1-9]\d*$/,
-                                    message: "So dem > 0"
+                                    message: "Số đêm > 0"
                                 }
                             ]}
                         >
@@ -211,11 +211,11 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={6}>
                         <Form.Item
                             name="giaNguoiLon"
-                            label="Gia nguoi lon"
+                            label="Giá người lớn"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "bắt buộc phải nhập"
                                 },
                                 {
                                     pattern: /^[1-9]\d*$/,
@@ -230,11 +230,11 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={6}>
                         <Form.Item
                             name="giaTreEm"
-                            label="Gia tre em"
+                            label="Giá trẻ em"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "bắt buộc phải nhập"
                                 },
                                 {
                                     pattern: /^[1-9]\d*$/,
@@ -249,11 +249,11 @@ const CreateStaffDialogAdd = (props) => {
                     <Col span={6}>
                         <Form.Item
                             name="giaTreNho"
-                            label="Gia tre nho"
+                            label="Giá trẻ nhỏ"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "bắt buộc phải nhập"
                                 },
                                 {
                                     pattern: /^[1-9]\d*$/,
@@ -275,11 +275,11 @@ const CreateStaffDialogAdd = (props) => {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Bat buoc phai nhap"
+                                    message: "bắt buộc phải nhập"
                                 },
                                 {
                                     min: 10,
-                                    message: "Ten tour phai it nhat 10 ky tu"
+                                    message: "chuỗi phải có ít nhất 10 kí tự"
                                 },
                                 {
                                     pattern: /^[a-zA-Z0-9\s-]+$/,

@@ -21,6 +21,7 @@ public class KhachDatDto {
     private String yeuCau;
     private Date createDate;
     private int idKS;
+    private String ksName;
 
     public KhachDatDto(KhachDat entity){
         if (entity != null){
@@ -32,6 +33,8 @@ public class KhachDatDto {
             this.yeuCau = entity.getYeuCau();
             this.createDate = entity.getCreateDate();
             this.idKS = entity.getKsan().getIdKhachSan();
+            this.ksName = entity.getKsan().getTenKS();
+
         }
     }
 }

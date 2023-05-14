@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Tabs, Row, Col, Table, Image, Form, Input, Upload } from "antd"
-
+import { Modal, Button, Tabs, Row, Col, Table, Image, Form, Input, Upload, Dropdown, Space, Select } from "antd"
+import { DownOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from "moment";
 import { addTourChiTiet, updateTourChiTiet } from "./StaffAcceptedService";
 import { toast } from "react-toastify";
+import { getTour } from "../create-staff/CreateStaffService"
+
+const { Option } = Select;
 
 toast.configure({
     autoClose: 1000,
@@ -27,17 +30,26 @@ function StaffAcceptedDialog(props) {
     const [form] = Form.useForm()
     const [timeItem, setTimeItem] = useState()
 
+    const [listTour, setListTour] = useState([])
+    const [idTour, setIdTour] = useState()
+
+
     const [fileImage, setFileImage] = useState()
     const handleUpload = (event) => {
         console.log('Tên tệp tin:', event.file.name);
         setFileImage(event.file.name)
     }
 
+    const handleSelectChange = (e) => {
+        setIdTour(e)
+    }
+
     const submitForm = async (values) => {
 
         const newValue = {
             ...values,
-            hinhAnh: fileImage
+            hinhAnh: fileImage,
+            idTour: idTour
         }
 
 
@@ -61,7 +73,6 @@ function StaffAcceptedDialog(props) {
     }
 
     useEffect(() => {
-        console.log("==>", item)
         if (item) {
             const newItem = {
                 ...item,
@@ -72,6 +83,26 @@ function StaffAcceptedDialog(props) {
                 form.setFieldsValue(newItem)
             }
         }
+    }, [])
+
+    useEffect(() => {
+        const getListTour = async () => {
+            const res = await getTour()
+            // console.log("==>", res.data)
+            const data = res.data
+            const newData = data.map(item => {
+                return {
+
+                    id: item.id,
+                    tenTour: item.tenTour
+
+                }
+            })
+            // console.log("==>", newData)
+            setListTour(newData)
+        }
+
+        getListTour()
     }, [])
 
 
@@ -174,6 +205,32 @@ function StaffAcceptedDialog(props) {
                             ]}
                         >
                             <Input />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={12}>
+                        <Form.Item
+                            name="idTourz"
+                            label="Id tour"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Bat buoc phai nhap"
+                                }
+                            ]}
+                        >
+                            <Select onChange={handleSelectChange}>
+                                {
+                                    listTour && listTour.map((item) => {
+                                        return (
+                                            <Option key={item.id} value={item.id}>{item.tenTour}</Option>
+                                        )
+                                    })
+                                }
+
+                                {/* <Option value="option2">Option 2</Option>
+                                <Option value="option3">Option 3</Option> */}
+                            </Select>
                         </Form.Item>
                     </Col>
 

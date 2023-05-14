@@ -111,7 +111,7 @@ function StaffAccepted() {
     }
 
     const onOkDelete = async () => {
-        const res = await deleteTourChiTiet(tourDelete.idChiTiet)
+        const res = await deleteTourChiTiet(tourDelete.id)
         if (res.status === 200) {
             toast.success("Xoa tour thanh cong")
         } else {

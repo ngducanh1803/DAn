@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Tabs, Row, Col, Table, Image, Form, Input, Upload } from "antd"
+import { Modal, Button, Tabs, Row, Col, Table, Image, Form, Input, Upload, Select } from "antd"
 
 import styled from 'styled-components';
 import moment from "moment";
@@ -7,6 +7,9 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import { values } from "lodash";
 import { addKhachDat, updateKhachDat } from "./KhachDatService";
+import { getAllKhachSan } from "../KhachSan/KhachSanService"
+
+const { Option } = Select;
 
 toast.configure({
     autoClose: 1000,
@@ -19,6 +22,13 @@ function KhachSanDialog(props) {
 
     const { open, onCancel, item } = props
     const [form] = Form.useForm()
+
+    const [listKhachSan, setListKhachSan] = useState([])
+    const [idKhachSan, setIdKhachSan] = useState()
+
+    const handleSelectChange = (e) => {
+        setIdKhachSan(e)
+    }
 
     const submitForm = async (values) => {
 
@@ -55,6 +65,24 @@ function KhachSanDialog(props) {
         if (item) {
             form.setFieldsValue(item)
         }
+    }, [])
+
+    useEffect(() => {
+        const getListKhachSan = async () => {
+            const res = await getAllKhachSan()
+            // console.log("==>", res.data)
+            const data = res.data
+            const listKS = data.map((item) => {
+                return {
+                    idKhachSan: item.idKhachSan,
+                    tenKS: item.tenKS
+                }
+            })
+            // console.log("==>", listKS)
+            setListKhachSan(listKS)
+        }
+
+        getListKhachSan()
     }, [])
 
     return (
@@ -163,7 +191,15 @@ function KhachSanDialog(props) {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Select onChange={handleSelectChange}>
+                                {
+                                    listKhachSan && listKhachSan.map(item => {
+                                        return (
+                                            <Option key={item.id} value={item.idKhachSan}>{item.tenKS}</Option>
+                                        )
+                                    })
+                                }
+                            </Select>
                         </Form.Item>
                     </Col>
                 </Row>
